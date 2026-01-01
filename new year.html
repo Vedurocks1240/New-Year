@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year 2026</title>
+
+<style>
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(circle, #001111, #000);
+    color: #00ffcc;
+
+    overflow-y: auto;
+    transform: scale(0.85);
+    transform-origin: top center;
+}
+
+/* TERMINAL BACKGROUND */
+#terminal {
+    position: fixed;
+    inset: 0;
+    padding: 20px;
+    font-family: monospace;
+    font-size: 14px;
+    color: rgba(0,255,180,0.18);
+    white-space: pre-wrap;
+    z-index: 0;
+}
+
+/* CANVAS */
+canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+#fireworks { z-index: 1; }
+#confetti { z-index: 2; }
+
+/* ASCII ART */
+pre {
+    position: relative;
+    z-index: 4;
+    font-size: 22px;
+    text-align: center;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc, 0 0 30px #00ffff;
+    margin-top: 80px;
+}
+
+/* THOUGHT */
+#thought {
+    z-index: 4;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 32px;
+    color: #00bfff;
+    text-shadow: 0 0 10px #00bfff;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* MESSAGE */
+#message {
+    z-index: 4;
+    margin: 40px auto;
+    max-width: 85%;
+    font-size: 22px;
+    text-align: center;
+    color: #00ffcc;
+    text-shadow: 0 0 8px #00ffcc;
+    font-family: Arial, sans-serif;
+}
+
+/* COPY BUTTON */
+#copyBtn {
+    display: block;
+    margin: 20px auto 80px;
+    padding: 14px 28px;
+    font-size: 18px;
+    background: transparent;
+    color: #00ffcc;
+    border: 2px solid #00ffcc;
+    border-radius: 8px;
+    cursor: pointer;
+    text-shadow: 0 0 6px #00ffcc;
+    box-shadow: 0 0 12px rgba(0,255,204,0.4);
+    transition: all 0.3s ease;
+}
+
+#copyBtn:hover {
+    background: #00ffcc;
+    color: #000;
+}
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+<canvas id="fireworks"></canvas>
+<canvas id="confetti"></canvas>
+
+<pre>
+
+██╗  ██╗ █████╗ ██████╗ ██████╗ ██╗   ██╗
+██║  ██║██╔══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝
+███████║███████║██████╔╝██████╔╝ ╚████╔╝
+██╔══██║██╔══██║██╔═══╝ ██╔═══╝   ╚██╔╝
+██║  ██║██║  ██║██║     ██║        ██║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝        ╚═╝
+
+
+███╗   ██╗███████╗██╗    ██╗
+████╗  ██║██╔════╝██║    ██║
+██╔██╗ ██║█████╗  ██║ █╗ ██║
+██║╚██╗██║██╔══╝  ██║███╗██║
+██║ ╚████║███████╗╚███╔███╔╝
+╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝
+
+
+██╗   ██╗███████╗ █████╗ ██████╗
+╚██╗ ██╔╝██╔════╝██╔══██╗██╔══██╗
+ ╚████╔╝ █████╗  ███████║██████╔╝
+  ╚██╔╝  ██╔══╝  ██╔══██║██╔══██╗
+   ██║   ███████╗██║  ██║██║  ██║
+   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝
+
+
+██████╗  ██████╗ ██████╗ ███████╗
+╚════██╗██╔═████╗╚════██╗██╔════╝
+ █████╔╝██║██╔██║ █████╔╝███████╗
+██╔═══╝ ████╔╝██║██╔═══╝ █     █║
+███████╗╚██████╔╝███████╗███████║
+╚══════╝ ╚═════╝ ╚══════╝╚══════╝
+
+</pre>
+
+<div id="thought"></div>
+
+<div id="message">
+As the clock resets, we don’t forget the past — we upgrade from it.<br>
+2025 taught. 2026 begins.<br>
+New goals. New risks. Same fire.<br><br>
+<b>Happy New Year 2026 🚀</b>
+</div>
+
+<button id="copyBtn" onclick="copyMessage()">📋 Copy New Year Message</button>
+
+<script>
+/* ===== RANDOM THOUGHT ===== */
+const thoughts = [
+    "2025 tested me. 2026 deploys me.",
+    "Old bugs removed. New features added.",
+    "Survived the crash. Ready to run.",
+    "Same codebase. Better optimization.",
+    "2026 compiled successfully."
+];
+document.getElementById("thought").innerText =
+thoughts[Math.floor(Math.random() * thoughts.length)];
+
+/* ===== COPY FUNCTION (RELIABLE MODERN + FALLBACK) ===== */
+function copyMessage() {
+    const text = `As the clock resets, we don’t forget the past — we upgrade from it.
+2025 taught. 2026 begins.
+New goals. New risks. Same fire.
+
+Happy New Year 2026 🚀`;
+
+    // Modern clipboard first
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+        .then(() => {
+            const btn = document.getElementById("copyBtn");
+            btn.innerText = "✅ Copied!";
+            setTimeout(() => btn.innerText = "📋 Copy New Year Message", 2000);
+        })
+        .catch(() => fallbackCopy(text));
+    } else {
+        fallbackCopy(text);
+    }
+}
+
+function fallbackCopy(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+
+    try {
+        document.execCommand("copy");
+        const btn = document.getElementById("copyBtn");
+        btn.innerText = "✅ Copied!";
+        setTimeout(() => btn.innerText = "📋 Copy New Year Message", 2000);
+    } catch (err) {
+        alert("Copy failed 😢");
+    }
+
+    document.body.removeChild(textarea);
+}
+
+/* ===== TERMINAL TYPEWRITER ===== */
+const terminal = document.getElementById("terminal");
+const fakeCPP = [
+"> g++ hack.cpp -o hack",
+"> ./hack",
+"#include <iostream>",
+"using namespace std;",
+"",
+"int main(){",
+"  cout << \"[+] Initializing breach...\" << endl;",
+"  cout << \"[+] Bypassing firewall...\" << endl;",
+"  cout << \"[+] Injecting payload...\" << endl;",
+"  cout << \"[+] Access granted.\" << endl;",
+"  return 0;",
+"}",
+"",
+"[✔] System compromised (fake)",
+"[✔] Welcome to 2026"
+];
+
+let l = 0, c = 0, cursor = true;
+
+setInterval(() => {
+    terminal.textContent =
+        terminal.textContent.replace(/▌$/, "") + (cursor ? "▌" : "");
+    cursor = !cursor;
+}, 500);
+
+setInterval(() => {
+    if (l < fakeCPP.length) {
+        terminal.textContent += fakeCPP[l][c++] || "\n";
+        if (c > fakeCPP[l].length) { l++; c = 0; }
+    }
+}, 40);
+
+/* ===== FIREWORKS ===== */
+const fw = document.getElementById("fireworks");
+const fctx = fw.getContext("2d");
+fw.width = innerWidth;
+fw.height = innerHeight;
+
+let rockets = [], sparks = [];
+
+function launch() {
+    rockets.push({
+        x: Math.random() * fw.width,
+        y: fw.height,
+        vy: -7 - Math.random() * 3,
+        color: `hsl(${Math.random() * 360},100%,60%)`
+    });
+}
+
+function explode(x, y, color) {
+    for (let i = 0; i < 60; i++) {
+        sparks.push({
+            x, y,
+            vx: (Math.random() - 0.5) * 6,
+            vy: (Math.random() - 0.5) * 6,
+            life: 60,
+            color
+        });
+    }
+}
+
+function fwAnim() {
+    fctx.clearRect(0, 0, fw.width, fw.height);
+    rockets.forEach((r, i) => {
+        r.y += r.vy;
+        fctx.fillStyle = r.color;
+        fctx.fillRect(r.x, r.y, 3, 8);
+        if (r.y < fw.height * 0.4) {
+            explode(r.x, r.y, r.color);
+            rockets.splice(i, 1);
+        }
+    });
+    sparks.forEach((s, i) => {
+        s.x += s.vx;
+        s.y += s.vy;
+        s.life--;
+        fctx.fillStyle = s.color;
+        fctx.fillRect(s.x, s.y, 3, 3);
+        if (s.life <= 0) sparks.splice(i, 1);
+    });
+    requestAnimationFrame(fwAnim);
+}
+setInterval(launch, 500);
+fwAnim();
+
+/* ===== CONFETTI ===== */
+const cf = document.getElementById("confetti");
+const cctx = cf.getContext("2d");
+cf.width = innerWidth;
+cf.height = innerHeight;
+
+let confetti = [];
+for (let i = 0; i < 200; i++) {
+    confetti.push({
+        x: Math.random() * cf.width,
+        y: Math.random() * cf.height,
+        vy: 2 + Math.random() * 3,
+        size: 5,
+        color: `hsl(${Math.random() * 360},100%,60%)`
+    });
+}
+
+function confettiAnim() {
+    cctx.clearRect(0, 0, cf.width, cf.height);
+    confetti.forEach(c => {
+        c.y += c.vy;
+        if (c.y > cf.height) c.y = 0;
+        cctx.fillStyle = c.color;
+        cctx.fillRect(c.x, c.y, c.size, c.size);
+    });
+    requestAnimationFrame(confettiAnim);
+}
+confettiAnim();
+</script>
+
+</body>
+</html>
